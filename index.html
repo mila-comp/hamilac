@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamilac — Distribuindo Sabores</title>
+<meta name="description" content="Hamilac — pilhas, energéticos, sucos, beleza e muito mais. Peça direto na loja oficial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="#inicio" class="brand">
+      <img src="assets/logo-full.png" alt="Hamilac — Distribuindo Sabores">
+    </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#inicio">Início</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#vantagens">Por que a Hamilac</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <label class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar produto...">
+    </label>
+    <a href="#" target="_blank" rel="noopener" class="store-link js-store-link" title="Comprar na loja oficial">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.5 16.5 16.5 7.5"/><path d="M9.5 7.5h7v7"/></svg>
+      <span class="store-link-text">Comprar agora</span>
+    </a>
+    <button class="icon-btn" id="cartBtn" aria-label="Abrir carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2l2.6 13.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <div class="top">
+    <span style="font-family:'Sora';font-weight:800;font-size:19px;">Menu</span>
+    <button class="icon-btn" id="mobileClose" aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <a href="#inicio">Início</a>
+  <a href="#categorias">Categorias</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#vantagens">Por que a Hamilac</a>
+  <a href="#contato">Contato</a>
+  <a href="#" target="_blank" rel="noopener" class="js-store-link btn btn--primary" style="margin-top:20px;">Comprar na loja oficial</a>
+</div>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow eyebrow--red">DISTRIBUIDORA HAMILAC</span>
+        <h1>Pilhas, energéticos, sucos e beleza — <em>tudo num só pedido.</em></h1>
+        <p class="lede">A Hamilac reúne os produtos que giram mais rápido no seu estoque, com preço de quem compra direto da fonte e entrega ágil em todo o país.</p>
+        <div class="hero-ctas">
+          <a href="#produtos" class="btn btn--primary">
+            Ver catálogo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#contato" class="btn btn--ghost">Falar com um consultor</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>6</b><span>categorias ativas</span></div>
+          <div class="hero-stat"><b>24+</b><span>SKUs no catálogo</span></div>
+          <div class="hero-stat"><b>48h</b><span>entrega em média</span></div>
+        </div>
+      </div>
+      <div class="orbit-wrap" aria-hidden="true">
+        <div class="orbit-bg"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring--in"></div>
+        <div id="orbitItems"></div>
+        <div class="orbit-center"><img src="assets/logo-icon.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="categorias">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--blue">O QUE VOCÊ ENCONTRA AQUI</span>
+        <h2>Um catálogo pensado para giro rápido</h2>
+      </div>
+      <div class="cat-grid" id="catGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="produtos">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--red">CATÁLOGO</span>
+        <h2>Produtos em destaque</h2>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="prod-grid" id="prodGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="vantagens">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--blue">POR QUE A HAMILAC</span>
+        <h2>Pensado para quem revende</h2>
+      </div>
+      <div class="value-grid" id="valueGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="news">
+        <div>
+          <h2>Quer preços de atacado?</h2>
+          <p>Cadastre-se e receba nossa tabela completa, com condições especiais para lojistas e mercadinhos.</p>
+        </div>
+        <form class="news-form" id="newsForm">
+          <input type="email" required placeholder="seu@email.com" id="newsEmail">
+          <button type="submit">Quero receber</button>
+          <span class="news-msg" id="newsMsg">Recebido! Nosso time comercial vai entrar em contato.</span>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site" id="contato">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="assets/logo-full.png" alt="Hamilac — Distribuindo Sabores">
+        </div>
+        <p>Distribuidora de produtos essenciais para o dia a dia — pilhas, bebidas, beleza e higiene, com a agilidade que o seu negócio precisa.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20l1.4-4.2A8 8 0 1 1 9 18.6L4 20Z"/><path d="M8.5 9.5c.3 2.6 2.4 4.7 5 5"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><line x1="7.5" y1="10.5" x2="7.5" y2="16.5"/><circle cx="7.5" cy="7.3" r=".4" fill="currentColor"/><path d="M11.5 16.5v-4a2 2 0 0 1 4 0v4"/><line x1="11.5" y1="10.5" x2="11.5" y2="16.5"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Categorias</h5>
+        <ul id="footCats"></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Ajuda</h5>
+        <ul>
+          <li><a href="#">Como comprar</a></li>
+          <li><a href="#">Entregas e prazos</a></li>
+          <li><a href="#">Trocas e devoluções</a></li>
+          <li><a href="#">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contato</h5>
+        <ul>
+          <li><a href="#">comercial@hamilac.com.br</a></li>
+          <li><a href="#">(11) 4002-8922</a></li>
+          <li><a href="#">Seg a sex, 8h às 18h</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Hamilac Distribuidora. Todos os direitos reservados.</span>
+      <span>Pagamento processado com segurança na loja oficial</span>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Carrinho de compras">
+  <div class="drawer-head">
+    <h3>Seu carrinho</h3>
+    <button class="drawer-close" id="drawerClose" aria-label="Fechar carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot"></div>
+</aside>
+
+<script src="script.js" defer></script>
+</body>
+</html>

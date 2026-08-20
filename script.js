@@ -200,15 +200,6 @@ document.getElementById('menuBtn').addEventListener('click', openMobile);
 document.getElementById('mobileClose').addEventListener('click', closeMobile);
 mobilePanel.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMobile));
 
-/* ---------- NEWSLETTER ---------- */
-document.getElementById('newsForm').addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const msg = document.getElementById('newsMsg');
-  msg.classList.add('show');
-  document.getElementById('newsEmail').value = '';
-  setTimeout(()=>msg.classList.remove('show'), 4000);
-});
-
 /* ---------- STORE / WHATSAPP LINKS ---------- */
 document.querySelectorAll('.js-store-link').forEach(el=>{ el.href = STORE_URL; });
 document.querySelectorAll('.js-whatsapp-link').forEach(el=>{ el.href = WHATSAPP_URL; });

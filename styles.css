@@ -218,8 +218,6 @@ header.site{
   transition:transform .2s var(--ease), box-shadow .2s var(--ease);
 }
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-card);}
-.prod-card--unavailable .prod-tile-photo{filter:grayscale(60%);opacity:.55;}
-.prod-card--unavailable .prod-body{opacity:.6;}
 .prod-tile{
   aspect-ratio:4/3;position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
@@ -238,7 +236,7 @@ header.site{
   font-family:'IBM Plex Mono';font-size:10px;font-weight:600;letter-spacing:.03em;
   padding:4px 9px;border-radius:999px;text-transform:uppercase;
 }
-.prod-tile .tag--status{left:auto;right:10px;background:rgba(27,28,43,.82);color:#fff;}
+
 .prod-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1;}
 .prod-body h4{font-size:14px;font-weight:600;line-height:1.35;min-height:38px;}
 .price{font-family:'IBM Plex Mono';font-weight:600;font-size:15px;margin-top:auto;}

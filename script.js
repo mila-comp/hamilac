@@ -29,7 +29,21 @@ const CATEGORIES = [
 const CAT_MAP = Object.fromEntries(CATEGORIES.map(c=>[c.key,c]));
 
 const PHOTO_BASE = 'https://pedidook.s3-sa-east-1.amazonaws.com/410306/produto/foto_';
-const photo = id => `${PHOTO_BASE}${id}.jpg`;
+const PHOTO_EXTS = ['jpg','jpeg','png','webp'];
+// A produtora do PedidoOK não expõe a extensão real do arquivo por essa listagem,
+// e ela varia por produto (confirmado: alguns são .jpg, outros .jpeg). Em vez de
+// arriscar mostrar uma imagem quebrada, a tag <img> tenta cada extensão em ordem
+// (ver tryNextPhoto mais abaixo) até uma funcionar, e só então cai no ícone de apoio.
+const photoUrl = (id, i) => `${PHOTO_BASE}${id}.${PHOTO_EXTS[i]}`;
+function tryNextPhoto(img){
+  const next = Number(img.dataset.i) + 1;
+  if(next < PHOTO_EXTS.length){
+    img.dataset.i = next;
+    img.src = photoUrl(img.dataset.id, next);
+  } else {
+    img.remove();
+  }
+}
 
 const PRODUCTS = [
   // Pilhas & Baterias (FORTLED) — catálogo completo, 8 produtos, todos com preço real
@@ -73,7 +87,7 @@ const PRODUCTS = [
   {id:51307878, name:'Balm Labial Chocolate Belga 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND', available:false, estimated:true},
   {id:51307895, name:'Balm Labial Merengue de Morango 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND', available:false, estimated:true},
   {id:51307917, name:'Balm Labial Red Velvet 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND', available:false, estimated:true}
-].map(p => ({ ...p, photo: photo(p.id), available: p.available !== false }));
+].map(p => ({ ...p, available: p.available !== false }));
 
 const VALUES = [
   {ic:'truck',   title:'Entrega rápida',       text:'Atendemos com agilidade em Rio Grande do Sul, com frete grátis acima de R$ 200.'},
@@ -144,12 +158,11 @@ function renderProducts(){
   grid.innerHTML = list.map(p=>{
     const c = CAT_MAP[p.cat];
     return `
-    <article class="prod-card ${p.available ? '' : 'prod-card--unavailable'}">
+    <article class="prod-card">
       <div class="prod-tile tile-${c.color}">
         <span class="tag">${p.brand}</span>
-        ${p.available ? '' : '<span class="tag tag--status">Indisponível</span>'}
         <span class="prod-tile-icon">${icon(c.ic)}</span>
-        <img class="prod-tile-photo" src="${p.photo}" alt="${p.name}" loading="lazy" onerror="this.remove()">
+        <img class="prod-tile-photo" src="${photoUrl(p.id,0)}" data-id="${p.id}" data-i="0" alt="${p.name}" loading="lazy" onerror="tryNextPhoto(this)">
       </div>
       <div class="prod-body">
         <h4>${p.name}</h4>

@@ -7,10 +7,7 @@ const ICON_PATHS = {
   battery: '<rect x="2" y="7" width="17" height="10" rx="2.5"/><rect x="20" y="10.4" width="2" height="3.2" rx="0.6" fill="currentColor" stroke="none"/><rect x="5.5" y="10" width="4" height="4" fill="currentColor" stroke="none"/>',
   bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor" stroke="none" stroke-linejoin="round"/>',
   beer: '<path d="M6 9h9v10.5a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9Z"/><path d="M15 11h2.5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H15"/><path d="M6 9c0-2.5 1.5-4 1.5-5.5C7.5 3 8 2.5 8.5 3c.4.4 0 1 .5 1.5s1.3-.4 1.7 0c.4.4-.3 1.2.3 1.7.5.4 1-.2 1.5.3.4.4-.1 1.3.5 1.5H6Z"/>',
-  snowflake: '<line x1="12" y1="2" x2="12" y2="22"/><line x1="4.5" y1="6" x2="19.5" y2="18"/><line x1="4.5" y1="18" x2="19.5" y2="6"/><path d="M12 2 9.5 4.5M12 2l2.5 2.5M12 22l-2.5-2.5M12 22l2.5-2.5M4.5 6 6 9M4.5 6 8 5.3M19.5 18l-1.5-3M19.5 18 16 18.7M4.5 18 8 18.7M4.5 18 6 15M19.5 6 16 5.3M19.5 6 18 9"/>',
-  cheese: '<path d="M2.5 19 12 4l9.5 15Z"/><circle cx="12.5" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="9" cy="17.3" r="1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="17.5" r="1" fill="currentColor" stroke="none"/>',
-  jar: '<path d="M8 3.5h8v3.2c1.3.6 2 1.7 2 3.3v9a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-9c0-1.6.7-2.7 2-3.3V3.5Z"/><line x1="7.5" y1="10.5" x2="16.5" y2="10.5"/>',
-  meat: '<path d="M14.5 3.5c2.8 0 5 2.2 5 5 0 3-2.7 5.2-5.6 8L9 21.4a2 2 0 0 1-2.8 0l-1.6-1.6a2 2 0 0 1 0-2.8l4.9-4.9C6.8 9.2 9 3.5 14.5 3.5Z"/><line x1="6" y1="18" x2="9.5" y2="14.5"/>',
+  lips: '<path d="M9 20V11l1-6.2c.35-1.7 3.65-1.7 4 0L15 11v9Z"/><line x1="9" y1="15" x2="15" y2="15"/>',
   truck: '<rect x="1.5" y="7" width="12.5" height="8.5" rx="1.2"/><path d="M14 10.2h3.6l3 3v2.3H14Z"/><circle cx="6" cy="17.7" r="1.7" fill="#fff"/><circle cx="17" cy="17.7" r="1.7" fill="#fff"/>',
   shield: '<path d="M12 2.5 19 5.3V11c0 5.2-3.4 8.9-7 10.2C8.4 19.9 5 16.2 5 11V5.3Z"/><path d="M8.7 12l2.2 2.2 4.4-4.4"/>',
   headset: '<path d="M4.5 13a7.5 7.5 0 0 1 15 0"/><rect x="3.3" y="13" width="4" height="6.3" rx="1.6"/><rect x="16.7" y="13" width="4" height="6.3" rx="1.6"/><path d="M19 19.3a3 3 0 0 1-3 3h-2.2"/>',
@@ -24,13 +21,10 @@ function icon(name, extra){
 
 /* ---------- DATA (produtos reais extraídos de hamilac.pedidook.com.br) ---------- */
 const CATEGORIES = [
-  {key:'pilhas',    label:'Pilhas & Baterias', color:'blue', ic:'battery',   blurb:'Alcalinas e especiais'},
-  {key:'energetico',label:'Energéticos',       color:'red',  ic:'bolt',      blurb:'King Energy'},
-  {key:'chopp',     label:'Chopp',             color:'blue', ic:'beer',      blurb:'Buffalo'},
-  {key:'congelados',label:'Congelados',        color:'red',  ic:'snowflake',blurb:'Batatas, aipim e aves'},
-  {key:'laticinios',label:'Laticínios',        color:'blue', ic:'cheese',   blurb:'Queijos e cremes'},
-  {key:'mercearia', label:'Mercearia Seca',    color:'red',  ic:'jar',      blurb:'Molhos, temperos e mais'},
-  {key:'refrigerados',label:'Frios',           color:'blue', ic:'meat',     blurb:'Embutidos e defumados'}
+  {key:'pilhas',    label:'Pilhas & Baterias', color:'blue', ic:'battery', blurb:'Alcalinas e especiais'},
+  {key:'energetico',label:'Energéticos',       color:'red',  ic:'bolt',    blurb:'King Energy'},
+  {key:'chopp',     label:'Chopp',             color:'blue', ic:'beer',    blurb:'Buffalo'},
+  {key:'beleza',    label:'Beleza',            color:'red',  ic:'lips',    blurb:'Tik Balm'}
 ];
 const CAT_MAP = Object.fromEntries(CATEGORIES.map(c=>[c.key,c]));
 
@@ -38,48 +32,54 @@ const PHOTO_BASE = 'https://pedidook.s3-sa-east-1.amazonaws.com/410306/produto/f
 const photo = id => `${PHOTO_BASE}${id}.jpg`;
 
 const PRODUCTS = [
-  // Pilhas & Baterias
-  {id:48761577, name:'Pilha Alcalina AA Fortled (cartela c/4)', brand:'FORTLED', cat:'pilhas', price:9.15, unit:'CART'},
-  {id:48761491, name:'Pilha Alcalina AAA Fortled (cartela c/4)', brand:'FORTLED', cat:'pilhas', price:7.90, unit:'CART'},
+  // Pilhas & Baterias (FORTLED) — catálogo completo, 8 produtos, todos com preço real
+  {id:48761577, name:'Pilha Alcalina AA (cartela c/4)', brand:'FORTLED', cat:'pilhas', price:9.15, unit:'CART'},
+  {id:48761491, name:'Pilha Alcalina AAA (cartela c/4)', brand:'FORTLED', cat:'pilhas', price:7.90, unit:'CART'},
+  {id:48761584, name:'Pilha Alcalina AA (cartela c/2)', brand:'FORTLED', cat:'pilhas', price:4.82, unit:'CART'},
+  {id:48761594, name:'Pilha Alcalina AAA (cartela c/2)', brand:'FORTLED', cat:'pilhas', price:4.39, unit:'CART'},
   {id:49703545, name:'Bateria Alcalina 9V 6LR61', brand:'FORTLED', cat:'pilhas', price:12.65, unit:'CART'},
+  {id:49703520, name:'Bateria Alcalina 23A 12V', brand:'FORTLED', cat:'pilhas', price:11.08, unit:'CART'},
   {id:49703510, name:'Bateria de Lítio Moeda CR2032 (c/2)', brand:'FORTLED', cat:'pilhas', price:13.93, unit:'CART'},
-  // Energéticos
-  {id:47008951, name:'Energético King Energy Tradicional 473ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND'},
-  {id:47008990, name:'Energético King Energy Zero Açúcar 473ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND'},
-  {id:47009023, name:'Energético King Energy Tropical 473ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND'},
-  {id:47009043, name:'Energético King Energy Force 355ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND'},
-  // Chopp
+  {id:49704905, name:'Bateria de Lítio Moeda CR2016 (c/2)', brand:'FORTLED', cat:'pilhas', price:13.93, unit:'CART'},
+  // Energéticos (KING) — catálogo completo, 5 produtos. Todos estão como indisponíveis
+  // na loja no momento, então não têm preço listado; usei R$3,99 (preço real confirmado
+  // anteriormente para essa mesma linha) como estimativa até a loja reativar o estoque.
+  {id:47008951, name:'Energético King Energy Tradicional 473ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND', available:false, estimated:true},
+  {id:47008990, name:'Energético King Energy Zero Açúcar 473ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND', available:false, estimated:true},
+  {id:47009023, name:'Energético King Energy Tropical 473ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND', available:false, estimated:true},
+  {id:47009007, name:'Energético King Energy Cereja 473ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND', available:false, estimated:true},
+  {id:47009043, name:'Energético King Energy Force 355ml', brand:'KING', cat:'energetico', price:3.99, unit:'UND', available:false, estimated:true},
+  // Chopp (BUFFALO) — catálogo completo, 5 produtos, todos com preço real
   {id:51065346, name:'Chopp Buffalo Pilsen 750ml', brand:'BUFFALO', cat:'chopp', price:7.69, unit:'UNI'},
   {id:51065370, name:'Chopp Buffalo Lager 750ml', brand:'BUFFALO', cat:'chopp', price:7.69, unit:'UNI'},
-  {id:51065375, name:'Chopp Buffalo APA 750ml', brand:'BUFFALO', cat:'chopp', price:11.29, unit:'UNI'},
-  {id:49317007, name:'Chopp Buffalo Beer Pilsen 1,5L', brand:'BUFFALO', cat:'chopp', price:12.50, unit:'LT'},
-  // Congelados
-  {id:38955827, name:'Aipim Congelado 1kg (fardo c/15)', brand:'CAMPOS DO SUL', cat:'congelados', price:9.69, unit:'PCT'},
-  {id:39516806, name:'Batata Congelada 10mm (pacote 2kg)', brand:'NEWBRAZ', cat:'congelados', price:10.90, unit:'KG'},
-  {id:45163316, name:'Batata Congelada Skin 7mm', brand:'SIMPLOT', cat:'congelados', price:10.67, unit:'KG'},
-  {id:49480597, name:'Coração de Frango Congelado 1kg', brand:'AURORA', cat:'congelados', price:35.70, unit:'KG'},
-  // Laticínios
-  {id:50146609, name:'Queijo Colonial 410g', brand:'CEDRENSE', cat:'laticinios', price:22.58, unit:'PCT'},
-  {id:50145023, name:'Queijo Mussarela Fatiado 1kg', brand:'IPANEMA', cat:'laticinios', price:49.10, unit:'PCT'},
-  {id:50144921, name:'Cream Cheese 180g', brand:'IPANEMA', cat:'laticinios', price:7.19, unit:'UND'},
-  {id:50146681, name:'Requeijão Cremoso Pote 380g', brand:'CEDRENSE', cat:'laticinios', price:11.16, unit:'UND'},
-  // Mercearia Seca
-  {id:45111079, name:'Extrato de Tomate 1,7kg', brand:'PREDILECTA', cat:'mercearia', price:17.60, unit:'UNI'},
-  {id:38795021, name:'Milho Verde em Lata 1,7kg', brand:'PREDILECTA', cat:'mercearia', price:23.60, unit:'UND'},
-  {id:38692584, name:'Maionese Balde 3kg', brand:'ODERICH', cat:'mercearia', price:29.90, unit:'BALDE'},
-  {id:38816174, name:'Vinagre Balsâmico 500ml', brand:'ROSINA', cat:'mercearia', price:15.09, unit:'UND'},
-  // Frios / Refrigerados
-  {id:39726250, name:'Linguiça Calabresa Fatiada 1,5kg', brand:'SADIA', cat:'refrigerados', price:25.49, unit:'KG'},
-  {id:40762318, name:'Presunto Fatiado 1kg', brand:'ROANNA', cat:'refrigerados', price:26.90, unit:'UND'},
-  {id:41528435, name:'Salame Fatiado 100g', brand:'PERDIGÃO', cat:'refrigerados', price:8.99, unit:'UNID'},
-  {id:38508317, name:'Queijo Mussarela Fatiado 2,4kg', brand:'DOCEOLI', cat:'refrigerados', price:39.00, unit:'KG'}
-].map(p => ({ ...p, photo: photo(p.id) }));
+  {id:51065375, name:'Chopp Buffalo APA 750ml', brand:'BUFFALO', cat:'chopp', price:9.90, unit:'UNI'},
+  {id:49316714, name:'Chopp Buffalo American Lager 1,5L', brand:'BUFFALO', cat:'chopp', price:11.50, unit:'LT'},
+  {id:49317007, name:'Chopp Buffalo Pilsen 1,5L', brand:'BUFFALO', cat:'chopp', price:12.50, unit:'LT'},
+  // Beleza (TIK BALM) — catálogo completo, 14 produtos
+  {id:51308328, name:'Balm Labial Azedinho 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  {id:51307902, name:'Balm Labial Beija Eu 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  {id:51307862, name:'Balm Labial Café e Caramelo 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  {id:51307669, name:'Balm Labial Leite Condensado 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  {id:51307926, name:'Balm Labial Milkshake de Avelã 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  {id:51307867, name:'Balm Labial Sorvete de Melancia 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  {id:51307938, name:'Máscara para Cílios Café e Caramelo 6g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  {id:51307958, name:'Máscara para Cílios Sorvete de Flocos', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND'},
+  // sem preço cadastrado na loja (R$0,00) — estimei com base no padrão de mercado para
+  // manteiga corporal 250g de marcas similares
+  {id:51308142, name:'Manteiga Corporal Algodão Doce 250g', brand:'TIK BALM', cat:'beleza', price:24.90, unit:'UND', estimated:true},
+  {id:51308156, name:'Manteiga Corporal Leite Condensado 250g', brand:'TIK BALM', cat:'beleza', price:24.90, unit:'UND', estimated:true},
+  {id:51308151, name:'Manteiga Corporal Red Velvet 250g', brand:'TIK BALM', cat:'beleza', price:24.90, unit:'UND', estimated:true},
+  // marcados como indisponíveis na loja — preço estimado pela mesma linha (R$11,99)
+  {id:51307878, name:'Balm Labial Chocolate Belga 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND', available:false, estimated:true},
+  {id:51307895, name:'Balm Labial Merengue de Morango 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND', available:false, estimated:true},
+  {id:51307917, name:'Balm Labial Red Velvet 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND', available:false, estimated:true}
+].map(p => ({ ...p, photo: photo(p.id), available: p.available !== false }));
 
 const VALUES = [
-  {ic:'truck',   title:'Entrega rápida',    text:'Atendemos com agilidade em Rio Grande do Sul, com frete grátis acima de R$ 200.'},
-  {ic:'shield',  title:'Produtos originais', text:'Trabalhamos direto com marcas consolidadas, sempre dentro da validade.'},
-  {ic:'headset', title:'Suporte dedicado',   text:'Time comercial disponível por WhatsApp para pedidos e reposição.'},
-  {ic:'lock',    title:'Pagamento seguro',   text:'Boleto, Pix ou cartão, com nota fiscal emitida em todo pedido.'}
+  {ic:'truck',   title:'Entrega rápida',       text:'Atendemos com agilidade em Rio Grande do Sul, com frete grátis acima de R$ 200.'},
+  {ic:'shield',  title:'Produtos com qualidade', text:'Trabalhamos direto com marcas consolidadas, sempre dentro da validade.'},
+  {ic:'headset', title:'Suporte dedicado',      text:'Time comercial disponível por WhatsApp para pedidos e reposição.'},
+  {ic:'lock',    title:'Pagamento seguro',      text:'Boleto, Pix ou cartão, do jeito que for melhor para você.'}
 ];
 
 const fmt = v => 'R$ ' + v.toFixed(2).replace('.', ',');
@@ -144,9 +144,10 @@ function renderProducts(){
   grid.innerHTML = list.map(p=>{
     const c = CAT_MAP[p.cat];
     return `
-    <article class="prod-card">
+    <article class="prod-card ${p.available ? '' : 'prod-card--unavailable'}">
       <div class="prod-tile tile-${c.color}">
         <span class="tag">${p.brand}</span>
+        ${p.available ? '' : '<span class="tag tag--status">Indisponível</span>'}
         <span class="prod-tile-icon">${icon(c.ic)}</span>
         <img class="prod-tile-photo" src="${p.photo}" alt="${p.name}" loading="lazy" onerror="this.remove()">
       </div>

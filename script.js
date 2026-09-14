@@ -22,7 +22,7 @@ function icon(name, extra){
 
 /* ---------- DATA (produtos reais extraídos de hamilac.pedidook.com.br) ---------- */
 const CATEGORIES = [
-  {key:'pilhas',    label:'Pilhas & Baterias', color:'blue', ic:'battery', blurb:'Alcalinas e especiais'},
+  {key:'pilhas',    label:'Pilhas & Baterias', color:'blue', ic:'battery', blurb:'Alcalinas e zinco'},
   {key:'energetico',label:'Energéticos',       color:'red',  ic:'bolt',    blurb:'King Energy'},
   {key:'chopp',     label:'Chopp',             color:'blue', ic:'beer',    blurb:'Buffalo'},
   {key:'beleza',    label:'Beleza',            color:'red',  ic:'lips',    blurb:'Tik Balm'}

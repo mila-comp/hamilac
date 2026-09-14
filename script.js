@@ -12,6 +12,7 @@ const ICON_PATHS = {
   shield: '<path d="M12 2.5 19 5.3V11c0 5.2-3.4 8.9-7 10.2C8.4 19.9 5 16.2 5 11V5.3Z"/><path d="M8.7 12l2.2 2.2 4.4-4.4"/>',
   headset: '<path d="M4.5 13a7.5 7.5 0 0 1 15 0"/><rect x="3.3" y="13" width="4" height="6.3" rx="1.6"/><rect x="16.7" y="13" width="4" height="6.3" rx="1.6"/><path d="M19 19.3a3 3 0 0 1-3 3h-2.2"/>',
   lock: '<rect x="4.5" y="11" width="15" height="9.5" rx="2.2"/><path d="M7.8 11V7.3a4.2 4.2 0 0 1 8.4 0V11"/>',
+  tag: '<path d="M11.5 3H19a2 2 0 0 1 2 2v7.5L11.4 22 2 12.6 11.5 3Z"/><circle cx="15" cy="8" r="1.4" fill="currentColor" stroke="none"/>',
   external: '<path d="M7.5 16.5 16.5 7.5"/><path d="M9.5 7.5h7v7"/>',
   whatsapp: '<path d="M12 3C7 3 3 7 3 12c0 1.7.5 3.3 1.3 4.7L3 21l4.5-1.2C8.8 20.5 10.4 21 12 21c5 0 9-4 9-9s-4-9-9-9Z" fill="#25D366" stroke="none"/><path d="M8.7 8.4c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 1.9 3 4.6 4.2 2.3.9 2.7.7 3.2.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.1-1.3-.1-.1-.2-.2-.5-.3-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.2-1.4-.8-.7-1.3-1.6-1.5-1.9-.1-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.4.1-.2.1-.3 0-.5-.1-.1-.6-1.4-.8-1.9Z" fill="#fff" stroke="none"/>'
 };
@@ -89,12 +90,19 @@ const PRODUCTS = [
   {id:51307917, name:'Balm Labial Red Velvet 10g', brand:'TIK BALM', cat:'beleza', price:11.99, unit:'UND', available:false, estimated:true}
 ].map(p => ({ ...p, available: p.available !== false }));
 
-const VALUES = [
-  {ic:'truck',   title:'Entrega rápida',       text:'Atendemos com agilidade em Rio Grande do Sul, com frete grátis acima de R$ 200.'},
+const VALUES_B2C = [
+  {ic:'truck',   title:'Entrega rápida',        text:'Atendemos com agilidade em Rio Grande do Sul, com frete grátis acima de R$ 200.'},
   {ic:'shield',  title:'Produtos com qualidade', text:'Trabalhamos direto com marcas consolidadas, sempre dentro da validade.'},
-  {ic:'headset', title:'Suporte dedicado',      text:'Time comercial disponível por WhatsApp para pedidos e reposição.'},
-  {ic:'lock',    title:'Pagamento seguro',      text:'Boleto, Pix ou cartão, do jeito que for melhor para você.'}
+  {ic:'headset', title:'Suporte dedicado',       text:'Time de atendimento disponível por WhatsApp sempre que precisar.'},
+  {ic:'lock',    title:'Pagamento seguro',       text:'Boleto, Pix ou cartão, do jeito que for melhor para você.'}
 ];
+const VALUES_B2B = [
+  {ic:'tag',     title:'Preço de atacado',        text:'Condições especiais para quem compra em quantidade para revender.'},
+  {ic:'headset', title:'Vendedor dedicado',       text:'Time comercial disponível por WhatsApp para orçamentos e reposição.'},
+  {ic:'truck',   title:'Entrega para o comércio', text:'Atendemos lojistas e mercadinhos em todo o Rio Grande do Sul.'},
+  {ic:'lock',    title:'Pagamento flexível',      text:'Boleto e outras condições combinadas direto com nosso time.'}
+];
+const VALUES = (typeof window!=='undefined' && window.HAMILAC_MODE==='b2b') ? VALUES_B2B : VALUES_B2C;
 
 const fmt = v => 'R$ ' + v.toFixed(2).replace('.', ',');
 
